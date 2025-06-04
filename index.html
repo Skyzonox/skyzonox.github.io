@@ -4,433 +4,811 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enzo Eniona - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0D82D0',
+                        'primary-light': '#93B7FF',
+                        'primary-dark': '#0A6BA3'
+                    },
+                    fontFamily: {
+                        'sans': ['system-ui', '-apple-system', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+
+        /* Améliorations responsive */
+        @media (max-width: 640px) {
+            .project-card {
+                margin-bottom: 1rem;
+            }
+            .timeline-mobile {
+                padding-left: 2rem;
+            }
+        }
+    </style>
 </head>
-<body>
-    <div class="portfolio">
-        <header>
-            <a href="#home" class="logo">Enzo Eniona</a>
-            <nav>
-                <a href="#home" class="active">Accueil</a>
-                <a href="#profile">Profil</a>
-                <a href="#experience">Expérience</a>
-                <a href="#education">Formation</a>
-                <a href="#skills">Compétences</a>
-                <a href="#projects">Projets</a>
-                <a href="#veille">Veille Techno</a>
+<body class="bg-white text-gray-900 font-sans">
+    <div class="max-w-7xl mx-auto px-3 sm:px-5">
+        <!-- Header - Responsive optimisé -->
+        <header class="fixed top-0 left-0 w-full px-4 sm:px-8 lg:px-16 py-4 sm:py-6 bg-white/95 backdrop-blur-md shadow-lg flex justify-between items-center z-50">
+            <a href="#home" class="text-xl sm:text-2xl text-primary font-semibold hover:scale-110 transition-transform duration-500 cursor-pointer">
+                Enzo Eniona
+            </a>
+            <nav class="hidden md:flex space-x-4 lg:space-x-8">
+                <a href="#home" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Accueil</a>
+                <a href="#profile" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Profil</a>
+                <a href="#experience" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Expérience</a>
+                <a href="#education" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Formation</a>
+                <a href="#skills" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Compétences</a>
+                <a href="#projects" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Projets</a>
+                <a href="#veille" class="text-sm lg:text-lg text-primary font-medium hover:text-primary-light border-b-3 border-transparent hover:border-primary-light pb-1 transition-all duration-300">Veille Techno</a>
             </nav>
+            
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-btn" class="md:hidden text-primary p-2 rounded-md hover:bg-gray-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </header>
-        
-        <section id="home" class="home">
-            <div class="photo-profil">
-                <img src="profil.png" alt="Enzo Eniona">
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white z-40 transform -translate-x-full transition-transform duration-300 md:hidden">
+            <div class="flex flex-col items-center justify-center h-full space-y-6 sm:space-y-8">
+                <button id="close-menu" class="absolute top-6 right-6 text-primary text-3xl font-bold">&times;</button>
+                <a href="#home" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Accueil</a>
+                <a href="#profile" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Profil</a>
+                <a href="#experience" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Expérience</a>
+                <a href="#education" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Formation</a>
+                <a href="#skills" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Compétences</a>
+                <a href="#projects" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Projets</a>
+                <a href="#veille" class="text-lg sm:text-xl text-primary font-medium mobile-nav-link">Veille Techno</a>
             </div>
-            <div class="presentation">
-                <h1>Bonjour, Je m'appelle Enzo</h1>
-                <p>Je suis étudiant en BTS SIO option SLAM à l'EPSI et je suis passionné par la cybersécurité et l'informatique. À travers ce portfolio, vous découvrirez mes compétences et mes expériences.</p>
-            </div>
-        </section>
+        </div>
         
-        <section id="profile" class="profile-section">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <span class="contact-label">Email:</span>
-                    <span class="contact-value">enzo.eniona@gmail.com</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">Téléphone:</span>
-                    <span class="contact-value">07 69 46 05 59</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">Localisation:</span>
-                    <span class="contact-value">Toulouse / Castres</span>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-label">TryHackMe:</span>
-                    <span class="contact-value"><a href="https://tryhackme.com/p/Skyzonox" target="_blank">Skyzonox</a></span>
-                </div>
+        <!-- Home Section -->
+        <section id="home" class="flex flex-col lg:flex-row justify-center items-center gap-6 sm:gap-8 lg:gap-32 pt-28 sm:pt-32 lg:pt-40 pb-16 sm:pb-20 min-h-screen">
+            <div class="transition-transform duration-300 hover:scale-105 fade-in-up order-1 lg:order-none">
+                <img src="profil.png" alt="Enzo Eniona" class="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full object-cover shadow-2xl border-4 border-primary-light mx-auto">
+            </div>
+            <div class="max-w-lg text-center lg:text-left fade-in-up order-2 lg:order-none px-4 sm:px-0">
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-primary leading-tight">Bonjour, Je m'appelle Enzo</h1>
+                <p class="text-lg sm:text-xl lg:text-2xl leading-relaxed text-gray-700">Je suis étudiant en BTS SIO option SLAM à l'EPSI et je suis passionné par la cybersécurité et l'informatique. À travers ce portfolio, vous découvrirez mes compétences et mes expériences.</p>
             </div>
         </section>
         
-        <section id="experience" class="experience-section">
-            <h2>Expérience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan - Fév 2025</div>
-                    <div class="timeline-content">
-                        <h3>Stage avec un freelance cyber</h3>
-                        <p class="timeline-place">Freelance, Cybersécurité</p>
-                        <p>
-                            Stage axé sur la sécurité informatique et les méthodologies de test d'intrusion.
-                        </p>
-                        <ul class="timeline-tasks">
-                            <li>Hardening Debian 12</li>
-                            <li>Configuration et sécurisation de Docker</li>
-                            <li>Utilisation de SonarQube</li>
-                            <li>Apprentissage des méthodologies de pentest</li>
+        <!-- Profile Section -->
+        <section id="profile" class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                <div class="flex flex-col items-center text-center">
+                    <span class="font-semibold text-primary mb-2">Email:</span>
+                    <span class="text-sm sm:text-lg break-all">enzo.eniona@gmail.com</span>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <span class="font-semibold text-primary mb-2">Téléphone:</span>
+                    <span class="text-sm sm:text-lg">07 69 46 05 59</span>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <span class="font-semibold text-primary mb-2">Localisation:</span>
+                    <span class="text-sm sm:text-lg">Toulouse / Castres</span>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                    <span class="font-semibold text-primary mb-2">TryHackMe:</span>
+                    <span class="text-sm sm:text-lg"><a href="https://tryhackme.com/p/Skyzonox" target="_blank" class="text-primary underline hover:text-primary-light break-words">Skyzonox</a></span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience" class="py-16 sm:py-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Expérience
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+            <div class="max-w-4xl mx-auto px-4 sm:px-0">
+                <div class="relative">
+                    <!-- Timeline line responsive -->
+                    <div class="absolute left-4 sm:left-1/2 sm:transform sm:-translate-x-1/2 lg:left-32 lg:transform-none top-0 bottom-0 w-1 bg-primary-light"></div>
+                    
+                    <div class="space-y-8 sm:space-y-12">
+                        <!-- Experience 1 -->
+                        <div class="flex flex-col lg:flex-row lg:items-start relative timeline-mobile sm:pl-0">
+                            <div class="lg:w-64 lg:text-right lg:pr-8 mb-2 sm:mb-4 lg:mb-0">
+                                <div class="font-bold text-lg sm:text-xl text-primary">Jan - Fév 2025</div>
+                            </div>
+                            <div class="lg:flex-1 lg:pl-8 relative">
+                                <!-- Timeline dot responsive -->
+                                <div class="absolute left-[-29px] sm:left-1/2 sm:transform sm:-translate-x-1/2 lg:left-[-33px] lg:transform-none top-6 w-4 h-4 sm:w-5 sm:h-5 bg-white border-4 border-primary-light rounded-full z-10"></div>
+                                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg sm:ml-8 lg:ml-0">
+                                    <h3 class="text-lg sm:text-xl text-primary mb-2 font-semibold">Stage avec un freelance cyber</h3>
+                                    <p class="italic mb-3 sm:mb-4 text-gray-600 text-sm sm:text-base">Freelance, Cybersécurité</p>
+                                    <p class="mb-3 sm:mb-4 text-sm sm:text-base">Stage axé sur la sécurité informatique et les méthodologies de test d'intrusion.</p>
+                                    <ul class="list-disc pl-4 sm:pl-6 space-y-2 sm:space-y-3 text-sm sm:text-base">
+                                        <li><strong>Hardening système</strong> : Sécurisation de Debian 12 avec chiffrement LUKS/LVM, partitionnement sécurisé, configuration d'AppArmor, optimisation du noyau sysctl et mises à jour automatiques unattended-upgrades</li>
+                                        <li><strong>Sécurité réseau</strong> : NFtables/UFW/Iptables, gestion de pare-feu</li>
+                                        <li><strong>Authentification</strong> : Génération et gestion de clés SSH/GPG</li>
+                                        <li><strong>DevSecOps</strong> : Configuration de Docker, intégration de SonarQube pour l'analyse de sécurité du code et bonnes pratiques CI/CD</li>
+                                        <li><strong>Sécurité offensive</strong> : Apprentissage des techniques de Pentest (Nmap, Nikto, Nuclei, Gobuster, Hydra, Wfuzz, Sqlmap)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience 2 -->
+                        <div class="flex flex-col lg:flex-row lg:items-start relative timeline-mobile sm:pl-0">
+                            <div class="lg:w-64 lg:text-right lg:pr-8 mb-2 sm:mb-4 lg:mb-0">
+                                <div class="font-bold text-lg sm:text-xl text-primary">Mai - Juil 2024</div>
+                            </div>
+                            <div class="lg:flex-1 lg:pl-8 relative">
+                                <div class="absolute left-[-29px] sm:left-1/2 sm:transform sm:-translate-x-1/2 lg:left-[-33px] lg:transform-none top-6 w-4 h-4 sm:w-5 sm:h-5 bg-white border-4 border-primary-light rounded-full z-10"></div>
+                                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg sm:ml-8 lg:ml-0">
+                                    <h3 class="text-lg sm:text-xl text-primary mb-2 font-semibold">Stage pour l'entreprise l'Idée</h3>
+                                    <p class="italic mb-3 sm:mb-4 text-gray-600 text-sm sm:text-base">L'Idée, Toulouse</p>
+                                    <p class="mb-3 sm:mb-4 text-sm sm:text-base">Stage centré sur le référencement web et la gestion de contenu.</p>
+                                    <ul class="list-disc pl-4 sm:pl-6 space-y-1 sm:space-y-2 text-sm sm:text-base">
+                                        <li>Gestion et création de blog</li>
+                                        <li>Optimisation SEO</li>
+                                        <li>Stratégies de référencement</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Experience 3 -->
+                        <div class="flex flex-col lg:flex-row lg:items-start relative timeline-mobile sm:pl-0">
+                            <div class="lg:w-64 lg:text-right lg:pr-8 mb-2 sm:mb-4 lg:mb-0">
+                                <div class="font-bold text-lg sm:text-xl text-primary">Avril 2019</div>
+                            </div>
+                            <div class="lg:flex-1 lg:pl-8 relative">
+                                <div class="absolute left-[-29px] sm:left-1/2 sm:transform sm:-translate-x-1/2 lg:left-[-33px] lg:transform-none top-6 w-4 h-4 sm:w-5 sm:h-5 bg-white border-4 border-primary-light rounded-full z-10"></div>
+                                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg sm:ml-8 lg:ml-0">
+                                    <h3 class="text-lg sm:text-xl text-primary mb-2 font-semibold">Stage aux Restos du Cœur</h3>
+                                    <p class="italic mb-3 sm:mb-4 text-gray-600 text-sm sm:text-base">Restos du Cœur, Castres</p>
+                                    <p class="mb-3 sm:mb-4 text-sm sm:text-base">Stage d'observation et d'aide humanitaire.</p>
+                                    <ul class="list-disc pl-4 sm:pl-6 space-y-1 sm:space-y-2 text-sm sm:text-base">
+                                        <li>Don alimentaire</li>
+                                        <li>Préparation de différents produits</li>
+                                        <li>Participation aux activités de l'association</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Education Section -->
+        <section id="education" class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Formation
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+            <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
+                <!-- Education 1 -->
+                <div class="flex flex-col lg:flex-row gap-4">
+                    <div class="min-w-[120px] sm:min-w-[150px] font-bold text-lg sm:text-xl text-primary pt-2">2023 - 2025</div>
+                    <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg flex-1">
+                        <h3 class="text-lg sm:text-xl text-primary mb-2 font-semibold">EPSI : 2ème année de bachelor + BTS SIO</h3>
+                        <p class="italic mb-3 sm:mb-4 text-gray-600 text-sm sm:text-base">EPSI</p>
+                        <p class="mb-3 sm:mb-4 text-sm sm:text-base">Formation en informatique avec spécialisation en Services Informatiques aux Organisations option SLAM (Solutions Logicielles et Applications Métiers)</p>
+                        <ul class="list-disc pl-4 sm:pl-6 space-y-1 sm:space-y-2 text-sm sm:text-base">
+                            <li>Administration systèmes et réseaux (gestion de pare-feu, environnement Linux, OSINT, Nmap, sécurisation d'infrastructure)</li>
+                            <li>Conception et développement d'applications Web et Objets (Front-End Web, PHP, SQL,Js,React, Kotlin)</li>
+                            <li>Mobile Design et Expérience Utilisateur (design Figma)</li>
+                            <li>Marketing & Multimédia</li>
+                            <li>Culture économique, juridique & managériale</li>
+                            <li>Culture générale & Communication en langues française et anglaise</li>
                         </ul>
                     </div>
                 </div>
                 
-                <div class="timeline-item">
-                    <div class="timeline-date">Mai - Juil 2024</div>
-                    <div class="timeline-content">
-                        <h3>Stage pour l'entreprise l'Idée</h3>
-                        <p class="timeline-place">L'Idée, Toulouse</p>
-                        <p>
-                            Stage centré sur le référencement web et la gestion de contenu.
-                        </p>
-                        <ul class="timeline-tasks">
-                            <li>Gestion et création de blog</li>
-                            <li>Optimisation SEO</li>
-                            <li>Stratégies de référencement</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">Avril 2019</div>
-                    <div class="timeline-content">
-                        <h3>Stage aux Restos du Cœur</h3>
-                        <p class="timeline-place">Restos du Cœur, Castres</p>
-                        <p>
-                            Stage d'observation et d'aide humanitaire.
-                        </p>
-                        <ul class="timeline-tasks">
-                            <li>Don alimentaire</li>
-                            <li>Préparation de différents produits</li>
-                            <li>Participation aux activités de l'association</li>
-                        </ul>
+                <!-- Education 2 -->
+                <div class="flex flex-col lg:flex-row gap-4">
+                    <div class="min-w-[120px] sm:min-w-[150px] font-bold text-lg sm:text-xl text-primary pt-2">Juin 2023</div>
+                    <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg flex-1">
+                        <h3 class="text-lg sm:text-xl text-primary mb-2 font-semibold">Baccalauréat technologique STI2D</h3>
+                        <p class="italic mb-3 sm:mb-4 text-gray-600 text-sm sm:text-base">Mention Assez Bien</p>
+                        <p class="text-sm sm:text-base">Spécialité 2I2D SIN (Systèmes d'Information et Numérique)</p>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="education" class="education-section">
-            <h2>Formation</h2>
-            <div class="education-item">
-                <div class="education-date">2023 - 2025</div>
-                <div class="education-content">
-                    <h3>EPSI : 2ème année de bachelor + BTS SIO</h3>
-                    <p class="education-place">EPSI</p>
-                    <p>Formation en informatique avec spécialisation en Services Informatiques aux Organisations option SLAM (Solutions Logicielles et Applications Métiers)</p>
-                    <ul class="education-details">
-                        <li>Administration systèmes et réseaux (gestion de pare-feu, environnement Linux, OSINT, Nmap, sécurisation d'infrastructure)</li>
-                        <li>Conception et développement d'applications Web et Objets (Front-End Web, PHP, SQL,Js,React, Kotlin)</li>
-                        <li>Mobile Design et Expérience Utilisateur (design Figma)</li>
-                        <li>Marketing & Multimédia</li>
-                        <li>Culture économique, juridique & managériale</li>
-                        <li>Culture générale & Communication en langues française et anglaise</li>
-                    </ul>
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 sm:py-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Compétences
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-0">
+                <!-- Programming Skills -->
+                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg">
+                    <h3 class="text-lg sm:text-xl text-primary mb-4 sm:mb-6 text-center font-semibold">Programmation</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Python</span>
+                                <span class="text-xs sm:text-sm text-gray-600">60%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">PHP</span>
+                                <span class="text-xs sm:text-sm text-gray-600">45%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">SQL</span>
+                                <span class="text-xs sm:text-sm text-gray-600">60%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Kotlin</span>
+                                <span class="text-xs sm:text-sm text-gray-600">30%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">HTML/CSS</span>
+                                <span class="text-xs sm:text-sm text-gray-600">65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- Systems & Networks -->
+                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg">
+                    <h3 class="text-lg sm:text-xl text-primary mb-4 sm:mb-6 text-center font-semibold">Systèmes & Réseaux</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Linux</span>
+                                <span class="text-xs sm:text-sm text-gray-600">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Réseau informatique</span>
+                                <span class="text-xs sm:text-sm text-gray-600">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Gestion de pare-feu</span>
+                                <span class="text-xs sm:text-sm text-gray-600">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Docker</span>
+                                <span class="text-xs sm:text-sm text-gray-600">55%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 55%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cybersecurity -->
+                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg">
+                    <h3 class="text-lg sm:text-xl text-primary mb-4 sm:mb-6 text-center font-semibold">Cybersécurité</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Sécurité offensive</span>
+                                <span class="text-xs sm:text-sm text-gray-600">65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">OSINT</span>
+                                <span class="text-xs sm:text-sm text-gray-600">50%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Hardening Debian</span>
+                                <span class="text-xs sm:text-sm text-gray-600">65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Scan de vulnérabilités</span>
+                                <span class="text-xs sm:text-sm text-gray-600">55%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 55%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Other Skills -->
+                <div class="bg-white rounded-lg p-4 sm:p-6 shadow-lg">
+                    <h3 class="text-lg sm:text-xl text-primary mb-4 sm:mb-6 text-center font-semibold">Autres compétences</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Design Figma</span>
+                                <span class="text-xs sm:text-sm text-gray-600">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">SEO & Référencement</span>
+                                <span class="text-xs sm:text-sm text-gray-600">55%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 55%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Montage vidéo</span>
+                                <span class="text-xs sm:text-sm text-gray-600">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium text-sm sm:text-base">Anglais</span>
+                                <span class="text-xs sm:text-sm text-gray-600">50%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 sm:h-3">
+                                <div class="bg-primary h-2 sm:h-3 rounded-full" style="width: 50%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Projets
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/infrastructure-preview.png" alt="Projet Administration Infrastructure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Projet Administration Infrastructure</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Mise en place d'une maquette fonctionnelle de gestion de parc informatique intégrant GLPI et DynFi Firewall avec configuration réseau sécurisée WAN/LAN/DMZ.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">GLPI</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">DynFi Firewall</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Linux</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Réseau</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Sécurité</span>
+                        </div>
+                        <a href="projet-infrastructure.html" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Voir le projet
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/hardening-debian-preview.png" alt="Projet Hardening Debian 12" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Projet Hardening Debian 12</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Projet qui consisté à créer une machine debian chiffré et sécurisé: Gestion des accès, Configuration du pare-feu, Sécurisation du système</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">VMware</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">AppArmor</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Nftables</span>
+                        </div>
+                        <a href="projet-hardening-debian.html" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Voir le projet
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/battle-game-preview.png" alt="Python Battle Game" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Python Battle Game</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Développement d'un jeu en Python où deux personnages s'affrontent jusqu'à ce que leurs points de vie soient inférieurs à 0.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Python</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">POO</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Jeux</span>
+                        </div>
+                        <a href="https://github.com/Lildark21/py-battle-game" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/pokedex-preview.png" alt="Projet Pokedex React" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Projet Pokedex React</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Création d'un pokedex en react avec une API Pokémon</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">API</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">React</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">JS</span>
+                        </div>
+                        <a href="https://github.com/Skyzonox/pokedex_react" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/reseau-social-preview.png" alt="Réseau Social Dynamique PHP" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Réseau Social Dynamique PHP</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Développement d'un réseau social Dynamique en php avec un système système d'authentification, publication de posts commentaires, et likes.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">PHP</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">MySQL</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">HTML/CSS</span>
+                        </div>
+                        <a href="https://github.com/Skyzonox/instameme" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/site-vitrine-preview.png" alt="Site Vitrine HTML CSS" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Site Vitrine HTML CSS</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Création d'un site d'un réseaux social pour un partage de mèmes</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">HTML</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">CSS</span>
+                        </div>
+                        <a href="https://github.com/Skyzonox/instameme" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/rdv-medical-preview.png" alt="Système de Rendez-vous Médical" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Système de Rendez-vous Médical</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Application web de prise de rendez-vous médical avec une page pour les patients et rendez vous pour les psychologues.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">PHP</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">MySQL</span>
+                        </div>
+                        <a href="https://github.com/Lildark21/2v-Projet" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/cms-debian-preview.png" alt="Installation CMS Debian" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Installation CMS sur Debian</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Configuration d'un CMS WordPress sur Debian avec une base de données.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Debian</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Apache</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">MySQL</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">PHP</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">WordPress</span>
+                        </div>
+                        <a href="https://www.notion.so/Installation-WordPress-sur-Kali-2083cb8d265b80598758c739c499633f?source=copy_link" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Documentation ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/script-bash-preview.png" alt="Script Bash Gestion Logs" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Script Bash Gestion de Logs</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Script de gestion de logs système linux. Avec création de logs, suppréssion et modification</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Bash</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Linux</span>
+                        </div>
+                        <a href="https://github.com/Skyzonox/log_bash" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 10 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/demineur-preview.png" alt="Jeu du Démineur JavaScript" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Jeu du Démineur JavaScript</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Création  du jeu démineur avec différent niveaux de difficulté.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">JavaScript</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">HTML</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">CSS</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Algorithmes</span>
+                        </div>
+                        <a href="https://github.com/Skyzonox/demineur_js" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 11 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300 group project-card">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="images/app-notes-preview.png" alt="Application de Notes React Native" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 sm:p-6">
+                        <h3 class="text-lg sm:text-xl text-primary font-semibold mb-2 sm:mb-3">Application de Notes React Native</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">Application mobile de prise de notes et de création de tache avec Expo et react native.</p>
+                        <div class="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">React Native</span>
+                            <span class="bg-primary-light text-white px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Expo</span>
+                        </div>
+                        <a href="https://github.com/Skyzonox/react_app" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                            Code GitHub ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Veille Section -->
+        <section id="veille" class="py-16 sm:py-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Veille Technologique
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+            <div class="max-w-4xl mx-auto mb-8 sm:mb-12 text-center px-4 sm:px-0">
+                <p class="text-lg sm:text-xl text-gray-700 mb-4">Ma veille technologique se concentre principalement sur : <strong class="text-primary">"La cybersécurité et les outils pour les réseaux informatiques"</strong></p>
+                <p class="text-base sm:text-lg text-gray-600">Passionné par la cybersécurité, je maintiens une veille active sur les dernières vulnérabilités, les nouveaux outils de pentest et de sécurisation de système</p>
             </div>
             
-            <div class="education-item">
-                <div class="education-date">Juin 2023</div>
-                <div class="education-content">
-                    <h3>Baccalauréat technologique STI2D</h3>
-                    <p class="education-place">Mention Assez Bien</p>
-                    <p>Spécialité 2I2D SIN (Systèmes d'Information et Numérique)</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="skills" class="skills-section">
-            <h2>Compétences</h2>
-            <div class="skills-container">
-                <div class="skills-category">
-                    <h3>Programmation</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 60%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">PHP</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 45%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">SQL</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 60%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Kotlin</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 30%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">HTML/CSS</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 65%;"></div>
-                            </div>
-                        </div>
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-0">
+                <!-- Article 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E22AQF1WkL-hhjusg/feedshare-shrink_800/B4EZb7zi4aHQAk-/0/1747981320153?e=1750896000&v=beta&t=IakckXvi-ARlHDBZoZD3V0Ys1PWeZpSTS2fvbq0avyA" alt="GLPI 11" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </div>
-                </div>
-                
-                <div class="skills-category">
-                    <h3>Systèmes & Réseaux</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">Linux</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 85%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Réseau informatique</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Gestion de pare-feu</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 75%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Docker</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 55%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skills-category">
-                    <h3>Cybersécurité</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">Sécurité offensive</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 65%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">OSINT</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 50%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Nmap</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Hardening Debian</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 65%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Scan de vulnérabilités</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 55%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skills-category">
-                    <h3>Autres compétences</h3>
-                    <div class="skills-list">
-                        <div class="skill-item">
-                            <span class="skill-name">Design Figma</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 70%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">SEO & Référencement</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 55%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Montage vidéo</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span class="skill-name">Anglais</span>
-                            <div class="skill-bar">
-                                <div class="skill-level" style="width: 50%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="projects" class="projects-section">
-            <h2>Projets</h2>
-            <div class="projects-container">
-                <div class="project-card">
-                    <h3>Projet Administration Infrastructure</h3>
-                    <p>Mise en place d'une maquette fonctionnelle de gestion de parc informatique intégrant GLPI et DynFi Firewall avec configuration réseau sécurisée WAN/LAN/DMZ.</p>
-                    <div class="project-skills">
-                        <span>GLPI</span>
-                        <span>DynFi Firewall</span>
-                        <span>Linux</span>
-                        <span>Réseau</span>
-                        <span>Sécurité</span>
-                    </div>
-                    <div class="project-link">
-                        <a href="projet-infrastructure.html" class="btn-project">Voir le projet →</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>python battle game</h3>
-                    <p>Développement d’un jeu en Python où deux personnages s’affrontent jusqu’à ce que leurs points de vie soient inférieurs à 0.</p>
-                    <div class="project-skills">
-                        <span>Python</span>
-                        <span>POO</span>
-                        <span>Jeux</span>
-                    <div class="project-link">
-                        <a href="projet-battle-game.html" class="btn-project">Voir le projet →</a>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Projet Pokedex React</h3>
-                    <p>Création d'un pokedex en react avec une API Pokémon </p>
-                    <div class="project-skills">
-                        <span>API</span>
-                        <span>React</span>
-                        <span>JS</span>
-                    <div class="project-link">
-                        <a href="projet-pokedex.html" class="btn-project">Voir le projet →</a>
-                    </div>
-                    </div>
-                </div>
-
-
-
-
-                
-                <div class="project-card">
-                    <h3>Projet Hardenig debian 12</h3>
-                    <p>Projet qui consisté à créer une machine debian chiffré et sécurisé: Gestion des accès, Configuration du pare-feu, Sécurisation du système
-                    </p>
-                    <div class="project-skills">
-                        <span>VMware</span>
-                        <span>Apparmor</span>
-                        <span>Nftable</span>
-                    </div>
-                    <div class="project-link">
-                        <a href="projet-hardening-debian.html" class="btn-project">Voir le projet →</a>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="veille" class="veille-section">
-            <h2>Veille Technologique</h2>
-            <div class="veille-intro">
-                <p>Ma veille technologique se concentre principalement sur : <strong>"La cybersécurité et les outils pour les réseaux informatiques"</strong></p>
-                <p>Passionné par la cybersécurité, je maintiens une veille active sur les dernières vulnérabilités, les nouveaux outils de pentest et de sécurisation de système</p>
-            </div>
-            
-            <div class="veille-articles">
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="https://media.licdn.com/dms/image/v2/D4E22AQF1WkL-hhjusg/feedshare-shrink_800/B4EZb7zi4aHQAk-/0/1747981320153?e=1750896000&v=beta&t=IakckXvi-ARlHDBZoZD3V0Ys1PWeZpSTS2fvbq0avyA" alt="GLPI 11">
-                    </div>
-                    <div class="article-content">
-                        <div class="article-source">
-                            <span class="source-icon">📰</span>
+                    <div class="p-4 sm:p-6">
+                        <div class="flex items-center gap-2 mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 flex-wrap">
+                            <span class="text-base sm:text-lg">📰</span>
                             <span>LinkedIn - Ludovic BUTET</span>
-                            <span class="article-date">Mai 2025</span>
+                            <span class="text-primary-light font-medium">Mai 2025</span>
                         </div>
-                        <h3>GLPI 11 arrive avec des fonctionnalités révolutionnaires</h3>
-                        <p>Gestion des actifs plus flexible, intégration Formcreator, interface self-service modernisée et activation du 2FA pour renforcer la sécurité.</p>
-                        <a href="https://www.linkedin.com/posts/ludovicbutet_glpi-11-arrive-bient%C3%B4t-voici-les-principales-activity-7331565046780604416-gJJW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEjtogkBRQiTC3SNh1XSwOR2XFa4q3b_BWo" class="btn-read-more">En savoir plus</a>
+                        <h3 class="text-base sm:text-lg text-primary font-semibold mb-2 sm:mb-3 leading-tight">GLPI 11 arrive avec des fonctionnalités révolutionnaires</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 text-sm leading-relaxed">Gestion des actifs plus flexible, intégration Formcreator, interface self-service modernisée et activation du 2FA pour renforcer la sécurité.</p>
+                        <a href="https://www.linkedin.com/posts/ludovicbutet_glpi-11-arrive-bient%C3%B4t-voici-les-principales-activity-7331565046780604416-gJJW?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEjtogkBRQiTC3SNh1XSwOR2XFa4q3b_BWo" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:from-primary-light hover:to-primary transition-all duration-300">
+                            En savoir plus
+                        </a>
                     </div>
                 </div>
 
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="https://www.it-connect.fr/wp-content-itc/uploads/2025/05/Windows-Server-2025-Active-Directory-dMSA-BadSuccessor.jpg" alt="BadSuccessor Vulnerability">
+                <!-- Article 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="https://www.it-connect.fr/wp-content-itc/uploads/2025/05/Windows-Server-2025-Active-Directory-dMSA-BadSuccessor.jpg" alt="BadSuccessor Vulnerability" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="article-content">
-                        <div class="article-source">
-                            <span class="source-icon">🔒</span>
+                    <div class="p-4 sm:p-6">
+                        <div class="flex items-center gap-2 mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 flex-wrap">
+                            <span class="text-base sm:text-lg">🔒</span>
                             <span>Cyber Heads Up</span>
-                            <span class="article-date">Mai 2025</span>
+                            <span class="text-primary-light font-medium">Mai 2025</span>
                         </div>
-                        <h3>BadSuccessor : Vulnérabilité critique dans Active Directory</h3>
-                        <p>Une faille d'escalade de privilèges dans Windows Server 2025 permet aux attaquants d'usurper l'identité de n'importe quel utilisateur AD.</p>
-                        <a href="https://www.it-connect.fr/windows-server-2025-compte-dmsa-cette-faille-critique-menace-lactive-directory/" class="btn-read-more">En savoir plus</a>
+                        <h3 class="text-base sm:text-lg text-primary font-semibold mb-2 sm:mb-3 leading-tight">BadSuccessor : Vulnérabilité critique dans Active Directory</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 text-sm leading-relaxed">Une faille d'escalade de privilèges dans Windows Server 2025 permet aux attaquants d'usurper l'identité de n'importe quel utilisateur AD.</p>
+                        <a href="https://www.it-connect.fr/windows-server-2025-compte-dmsa-cette-faille-critique-menace-lactive-directory/" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:from-primary-light hover:to-primary transition-all duration-300">
+                            En savoir plus
+                        </a>
                     </div>
                 </div>
 
-                <div class="article-card">
-                    <div class="article-image">
-                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlPB2vl_nzxvdQf-t0Lkjof6hugcJ6SJ2dTkMrzNVkGz5D-6SHCaTvguA7tlJHC-IPClptVpMlDAMhFrLsvZhj2_4SeQWrUD-5LYGx-UL0aFYdnMaR30ZE-3mIC5fPBn8DVYkppmGuP4cRzRnZ25xMYDrN0EHFl_7cIHW9FTmYSE89aWGaAjBrjbES_QZZ/s728-rw-e365/malware-install.jpg" alt="Winos 4.0 Malware">
+                <!-- Article 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-40 sm:h-48 overflow-hidden">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlPB2vl_nzxvdQf-t0Lkjof6hugcJ6SJ2dTkMrzNVkGz5D-6SHCaTvguA7tlJHC-IPClptVpMlDAMhFrLsvZhj2_4SeQWrUD-5LYGx-UL0aFYdnMaR30ZE-3mIC5fPBn8DVYkppmGuP4cRzRnZ25xMYDrN0EHFl_7cIHW9FTmYSE89aWGaAjBrjbES_QZZ/s728-rw-e365/malware-install.jpg" alt="Winos 4.0 Malware" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
                     </div>
-                    <div class="article-content">
-                        <div class="article-source">
-                            <span class="source-icon">⚠️</span>
+                    <div class="p-4 sm:p-6">
+                        <div class="flex items-center gap-2 mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 flex-wrap">
+                            <span class="text-base sm:text-lg">⚠️</span>
                             <span>Security Research</span>
-                            <span class="article-date">Février 2025</span>
+                            <span class="text-primary-light font-medium">Février 2025</span>
                         </div>
-                        <h3>Winos 4.0 : Malware distribué via faux installateurs</h3>
-                        <p>Campagne utilisant de faux installateurs NSIS pour LetsVPN et QQ Browser. Le loader "Catena" contourne les antivirus en stockant les payloads en mémoire.</p>
-                        <a href="https://thehackernews.com/2025/05/hackers-use-fake-vpn-and-browser-nsis.html" class="btn-read-more">En savoir plus</a>
+                        <h3 class="text-base sm:text-lg text-primary font-semibold mb-2 sm:mb-3 leading-tight">Winos 4.0 : Malware distribué via faux installateurs</h3>
+                        <p class="text-gray-700 mb-3 sm:mb-4 text-sm leading-relaxed">Campagne utilisant de faux installateurs NSIS pour LetsVPN et QQ Browser. Le loader "Catena" contourne les antivirus en stockant les payloads en mémoire.</p>
+                        <a href="https://thehackernews.com/2025/05/hackers-use-fake-vpn-and-browser-nsis.html" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:from-primary-light hover:to-primary transition-all duration-300">
+                            En savoir plus
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
         
-        <section id="hobbies" class="hobbies-section">
-            <h2>Passions & Loisirs</h2>
-            <div class="hobbies-container">
-                <div class="hobby-card">
-                    <div class="hobby-icon">🥊</div>
-                    <h3>Sports</h3>
-                    <ul>
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Passions & Loisirs
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="text-4xl sm:text-5xl mb-4">🥊</div>
+                    <h3 class="text-lg sm:text-xl text-primary font-semibold mb-3 sm:mb-4">Sports</h3>
+                    <ul class="text-left space-y-1 sm:space-y-2 text-sm sm:text-base">
                         <li>Boxe thaï et MMA (depuis 2022)</li>
                         <li>Judo (5 ans)</li>
                         <li>Volley Ball (1 an)</li>
                     </ul>
                 </div>
                 
-                <div class="hobby-card">
-                    <div class="hobby-icon">🎮</div>
-                    <h3>Jeux vidéo</h3>
-                    <p>Passionné de jeux vidéo</p>
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="text-4xl sm:text-5xl mb-4">🎮</div>
+                    <h3 class="text-lg sm:text-xl text-primary font-semibold mb-3 sm:mb-4">Jeux vidéo</h3>
+                    <p class="leading-relaxed text-sm sm:text-base">Passionné de jeux vidéo</p>
                 </div>
                 
-                <div class="hobby-card">
-                    <div class="hobby-icon">🎬</div>
-                    <h3>Montage vidéo</h3>
-                    <p>Création et édition de contenu vidéo</p>
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg text-center hover:transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="text-4xl sm:text-5xl mb-4">🎬</div>
+                    <h3 class="text-lg sm:text-xl text-primary font-semibold mb-3 sm:mb-4">Montage vidéo</h3>
+                    <p class="leading-relaxed text-sm sm:text-base">Création et édition de contenu vidéo</p>
                 </div>
             </div>
         </section>
-        <div class="specification-box" style="text-align: center; margin: 2rem 0;">
-                                
-                <a href="SIO_E5_ENIONA.pdf" class="btn-project" target="_blank" style="margin-top: 1rem; display: inline-block;">
+
+        <!-- CV Download -->
+        <div class="text-center mb-16 sm:mb-20 px-4 sm:px-0">
+            <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg inline-block max-w-sm mx-auto">
+                <h3 class="text-xl sm:text-2xl text-primary font-bold mb-3 sm:mb-4">Dossier E5</h3>
+                <a href="SIO_E5_ENIONA.pdf" target="_blank" class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-base sm:text-lg">
                     SIO_E5_ENIONA
                 </a>
             </div>
+        </div>
         
-        <footer>
-            <p>&copy; 2024 Enzo Eniona - Portfolio</p>
+        <!-- Footer -->
+        <footer class="bg-primary text-white text-center py-6 sm:py-8 rounded-t-3xl mt-8 sm:mt-12">
+            <p class="text-base sm:text-lg">&copy; 2024 Enzo Eniona - Portfolio</p>
         </footer>
     </div>
+
+    <!-- JavaScript for mobile menu -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function openMenu() {
+            mobileMenu.classList.remove('-translate-x-full');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('-translate-x-full');
+            document.body.style.overflow = 'auto';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>

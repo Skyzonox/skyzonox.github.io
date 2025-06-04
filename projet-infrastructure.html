@@ -4,198 +4,309 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projet Administration Infrastructure - Enzo Eniona</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="projet-styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#0D82D0',
+                        'primary-light': '#93B7FF',
+                        'primary-dark': '#0A6BA3'
+                    },
+                    fontFamily: {
+                        'sans': ['system-ui', '-apple-system', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out; }
+    </style>
 </head>
-<body>
-    <nav class="back-nav">
-        <a href="index.html">
-            <span>←</span>
-            Retour au Portfolio
+<body class="bg-white text-gray-900 font-sans">
+    <!-- Back Navigation -->
+    <div class="fixed top-3 sm:top-5 left-3 sm:left-5 z-50">
+        <a href="index.html" class="bg-white/95 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex items-center gap-2 sm:gap-3 text-primary font-semibold text-sm sm:text-base">
+            <span class="text-lg sm:text-xl">←</span>
+            <span class="hidden sm:inline">Retour au Portfolio</span>
+            <span class="sm:hidden">Retour</span>
         </a>
-    </nav>
+    </div>
 
-    <section class="project-hero">
-        <h1>Projet Administration Infrastructure</h1>
-        <p>Déploiement et sécurisation d'une infrastructure de gestion de parc informatique avec GLPI et DynFi Firewall</p>
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-primary to-primary-light text-white pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-8">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 fade-in-up leading-tight">Administration Infrastructure</h1>
+            <p class="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-4xl mx-auto opacity-95 fade-in-up">
+                Déploiement d'une infrastructure complète avec GLPI pour la gestion de parc informatique et DynFi Firewall pour la sécurité réseau
+            </p>
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-6 sm:mt-8 fade-in-up">
+                <span class="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium">GLPI</span>
+                <span class="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium">DynFi Firewall</span>
+                <span class="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Debian</span>
+                <span class="bg-white/20 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Apache / MariaDB</span>
+            </div>
+        </div>
     </section>
 
-    <div class="project-content">
-        <section class="content-section">
-            <h2>Présentation du Projet</h2>
-            <p>Ce projet consiste en la mise en place d'une maquette fonctionnelle de gestion de parc informatique, intégrant GLPI pour l'administration des actifs IT et DynFi Firewall pour la sécurisation réseau. L'objectif était de créer une infrastructure complète avec segmentation réseau et règles de sécurité adaptées.</p>
-            
-            <div class="tech-stack">
-                <span class="tech-tag">GLPI 10.0.7</span>
-                <span class="tech-tag">DynFi Firewall</span>
-                <span class="tech-tag">Linux Debian</span>
-                <span class="tech-tag">Apache2</span>
-                <span class="tech-tag">MariaDB</span>
-                <span class="tech-tag">PHP</span>
-                <span class="tech-tag">Configuration Réseau</span>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2>Architecture Réseau Déployée</h2>
-            
-            <div class="architecture-diagram">
-                <img src="architecture-diagram.png" alt="Architecture réseau du projet" class="screenshot">
-                <p><strong>Architecture Multi-Zones :</strong> Segmentation WAN/LAN/DMZ pour une sécurité optimale</p>
-            </div>
-
-            <div class="two-column">
-                <div class="specification-box">
-                    <h3>Configuration Réseau</h3>
-                    <ul>
-                        <li><strong>WAN (em0) :</strong> Interface Internet en DHCP</li>
-                        <li><strong>LAN (em1) :</strong> Réseau interne 10.0.0.252/24</li>
-                        <li><strong>DMZ (em2) :</strong> Zone serveurs 192.168.1.1/24</li>
-                        <li><strong>Isolation :</strong> Séparation complète des zones</li>
-                    </ul>
-                </div>
-                <div class="specification-box">
-                    <h3>Règles de Sécurité</h3>
-                    <ul>
-                        <li>Blocage total des flux DMZ vers LAN</li>
-                        <li>Autorisation HTTPS/HTTP/ICMP/SSH LAN→DMZ</li>
-                        <li>Accès HTTP/HTTPS uniquement WAN→DMZ</li>
-                        <li>Filtrage par protocoles et ports</li>
+    <div class="max-w-7xl mx-auto px-3 sm:px-5">
+        <!-- Contexte du Projet -->
+        <section class="py-16 sm:py-20">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                    Contexte du Projet
+                    <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+                </h2>
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+                    <p class="text-base sm:text-lg leading-relaxed text-gray-700 mb-4">
+                        <strong>Objectif :</strong> Créer une infrastructure complète pour gérer un parc informatique d'entreprise.
+                    </p>
+                    <p class="text-base sm:text-lg leading-relaxed text-gray-700 mb-4">
+                        <strong>Solutions déployées :</strong>
+                    </p>
+                    <ul class="space-y-2 text-gray-700 ml-4 sm:ml-6 text-sm sm:text-base">
+                        <li>• GLPI : Gestion des équipements, tickets d'incidents et inventaire</li>
+                        <li>• DynFi Firewall : Sécurisation des flux réseau et segmentation</li>
+                        <li>• Architecture 3 zones : WAN, LAN et DMZ pour isoler les services</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="content-section">
-            <h2>Cahier des Charges Implémenté</h2>
+        <!-- Architecture Technique -->
+        <section class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Architecture Technique
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
             
-            <div class="screenshot-container">
-                <img src="cahier-charges.png" alt="Cahier des charges du projet" class="screenshot">
-                <p><strong>Spécifications de sécurité :</strong> Règles ACL pour la sécurisation de l'infrastructure</p>
-            </div>
-
-            <div class="network-config">
-                <div class="config-title">Règles de Sécurité Appliquées</div>
-                <p><strong>Sécurisation par ACL :</strong></p>
-                <p>• Blocage des flux DMZ → LAN</p>
-                <p>• Autorisation HTTPS, HTTP, ICMP, SSH depuis LAN vers DMZ</p>
-                <p>• Autorisation HTTP et HTTPS uniquement depuis WAN vers DMZ</p>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2>Installation et Configuration GLPI</h2>
-            
-            <div class="process-step">
-                <h4>Étape 1 : Environnement LAMP</h4>
-                <div class="network-config">
-                    <div class="config-title">Commandes d'installation</div>
-                    <p>sudo apt update && sudo apt upgrade -y</p>
-                    <p>sudo apt install apache2 mariadb-server -y</p>
-                    <p>sudo apt install php php-mysql php-xml php-mbstring php-curl php-gd php-intl php-zip php-bz2 php-ldap php-imap php-apcu php-xmlrpc -y</p>
+            <div class="max-w-6xl mx-auto">
+                <!-- Architecture Diagram -->
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg mb-6 sm:mb-8 text-center">
+                    <img src="architecture-diagram.png" alt="Architecture réseau du projet" class="max-w-full mx-auto rounded-lg shadow-md border border-gray-200">
+                    <p class="mt-4 text-gray-600 font-medium text-sm sm:text-base">
+                        <strong class="text-primary">Schéma réseau :</strong> Segmentation en trois zones distinctes pour optimiser la sécurité
+                    </p>
                 </div>
-            </div>
 
-            <div class="process-step">
-                <h4>Étape 2 : Configuration Base de Données</h4>
-                <div class="network-config">
-                    <div class="config-title">Configuration MariaDB</div>
-                    <p>CREATE DATABASE glpi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</p>
-                    <p>CREATE USER 'glpi'@'localhost' IDENTIFIED BY 'mot_de_passe';</p>
-                    <p>GRANT ALL PRIVILEGES ON glpi.* TO 'glpi'@'localhost';</p>
-                </div>
-            </div>
+                <!-- Configuration Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                        <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Configuration Réseau</h3>
+                        <div class="space-y-3 sm:space-y-4">
+                            <div class="border-l-4 border-primary-light pl-4">
+                                <p class="font-semibold text-sm sm:text-base">Zone WAN (em0)</p>
+                                <p class="text-xs sm:text-sm text-gray-600">Connexion Internet via DHCP</p>
+                            </div>
+                            <div class="border-l-4 border-primary-light pl-4">
+                                <p class="font-semibold text-sm sm:text-base">Zone LAN (em1)</p>
+                                <p class="text-xs sm:text-sm text-gray-600">Réseau interne 10.0.0.252/24 pour les utilisateurs</p>
+                            </div>
+                            <div class="border-l-4 border-primary-light pl-4">
+                                <p class="font-semibold text-sm sm:text-base">Zone DMZ (em2)</p>
+                                <p class="text-xs sm:text-sm text-gray-600">Réseau serveurs 192.168.1.1/24 pour GLPI</p>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="screenshot-container">
-                <img src="glpi-dashboard.png" alt="Interface GLPI Dashboard" class="screenshot">
-                <p><strong>Interface GLPI :</strong> Dashboard principal avec statistiques du parc informatique</p>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2>Configuration DynFi Firewall</h2>
-            
-            <div class="screenshot-container">
-                <img src="dynfi-dashboard.png" alt="Interface DynFi Firewall" class="screenshot">
-                <p><strong>Interface DynFi :</strong> Dashboard de gestion du pare-feu avec monitoring en temps réel</p>
-            </div>
-
-            <div class="process-step">
-                <h4>Configuration des Interfaces</h4>
-                <div class="network-config">
-                    <div class="config-title">Assignation des Interfaces</div>
-                    <p>em0 → WAN (DHCP)</p>
-                    <p>em1 → LAN (Statique : 10.0.0.252/24)</p>
-                    <p>em2 → DMZ/OPT1 (Statique : 192.168.1.1/24)</p>
-                </div>
-            </div>
-
-            <div class="screenshot-container">
-                <img src="console-config.png" alt="Configuration console DynFi" class="screenshot">
-                <p><strong>Configuration Console :</strong> Paramétrage des adresses IP par interface</p>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <h2>Résultats et Démonstration</h2>
-            
-            <div class="results-grid">
-                <div class="result-card">
-                    <h4>Infrastructure Fonctionnelle</h4>
-                    <p>Déploiement réussi de GLPI avec base de données sécurisée et interface web accessible depuis le LAN.</p>
-                </div>
-                <div class="result-card">
-                    <h4>Sécurité Réseau</h4>
-                    <p>Configuration multi-zones avec règles de filtrage strictes et isolation des services critiques en DMZ.</p>
-                </div>
-                <div class="result-card">
-                    <h4>Gestion Centralisée</h4>
-                    <p>Interface unique pour l'administration du parc informatique avec système de tickets intégré.</p>
-                </div>
-                <div class="result-card">
-                    <h4>Monitoring</h4>
-                    <p>Surveillance en temps réel des connexions et statistiques détaillées du trafic réseau.</p>
+                    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                        <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Règles de Sécurité</h3>
+                        <div class="space-y-3 sm:space-y-4">
+                            <div class="bg-red-50 border-l-4 border-red-400 pl-4 py-2">
+                                <p class="font-semibold text-red-700 text-sm sm:text-base">BLOCAGE</p>
+                                <p class="text-xs sm:text-sm">DMZ → LAN (isolation complète)</p>
+                            </div>
+                            <div class="bg-green-50 border-l-4 border-green-400 pl-4 py-2">
+                                <p class="font-semibold text-green-700 text-sm sm:text-base">AUTORISÉ</p>
+                                <p class="text-xs sm:text-sm">LAN → DMZ (HTTP, HTTPS, SSH, ICMP)</p>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-400 pl-4 py-2">
+                                <p class="font-semibold text-blue-700 text-sm sm:text-base">LIMITÉ</p>
+                                <p class="text-xs sm:text-sm">WAN → DMZ (HTTP et HTTPS uniquement)</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="content-section">
-            <h2>Compétences Développées</h2>
-            
-            <div class="two-column">
-                <div class="specification-box">
-                    <h3>Administration Système</h3>
-                    <ul>
-                        <li>Installation et configuration environnement LAMP</li>
-                        <li>Gestion des bases de données MariaDB</li>
-                        <li>Configuration des services Apache et PHP</li>
-                        <li>Sécurisation et hardening système</li>
-                    </ul>
-                </div>
-                <div class="specification-box">
-                    <h3>Sécurité Réseau</h3>
-                    <ul>
-                        <li>Configuration pare-feu multi-zones</li>
-                        <li>Implémentation de règles ACL</li>
-                        <li>Segmentation réseau DMZ/LAN</li>
-                        <li>Monitoring et analyse du trafic</li>
-                    </ul>
-                </div>
-            </div>
+        <!-- Déploiement GLPI -->
+        <section class="py-16 sm:py-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Déploiement GLPI
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
 
-            <div class="process-step">
-                <h4>Bilan du Projet</h4>
-                <p>Ce projet m'a permis d'acquérir une expertise pratique en administration système et sécurité réseau. La réalisation complète de cette infrastructure démontre ma capacité à concevoir, déployer et sécuriser des solutions informatiques professionnelles, compétences essentielles pour mon orientation en cybersécurité.</p>
+            <div class="max-w-6xl mx-auto space-y-6 sm:space-y-8">
+                <!-- Installation Steps -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                        <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Étape 1 : Environnement Serveur</h3>
+                        <p class="text-gray-700 mb-4 text-sm sm:text-base">Installation des composants nécessaires :</p>
+                        <div class="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-lg font-mono text-xs sm:text-sm overflow-x-auto">
+                            <p># Mise à jour du système</p>
+                            <p>apt update && apt upgrade</p>
+                            <p></p>
+                            <p># Installation LAMP</p>
+                            <p>apt install apache2 mariadb-server php</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                        <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Étape 2 : Base de Données</h3>
+                        <p class="text-gray-700 mb-4 text-sm sm:text-base">Configuration MariaDB pour GLPI :</p>
+                        <div class="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-lg font-mono text-xs sm:text-sm overflow-x-auto">
+                            <p>CREATE DATABASE glpi;</p>
+                            <p>CREATE USER 'glpi'@'localhost';</p>
+                            <p>GRANT ALL ON glpi.* TO 'glpi'@'localhost';</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GLPI Interface -->
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg text-center">
+                    <img src="glpi-dashboard.png" alt="Interface GLPI" class="max-w-full mx-auto rounded-lg shadow-md border border-gray-200">
+                    <p class="mt-4 text-gray-600 font-medium text-sm sm:text-base">
+                        <strong class="text-primary">Interface GLPI opérationnelle :</strong> Dashboard de gestion avec statistiques temps réel
+                    </p>
+                </div>
             </div>
-            <div class="process-step">
-                <a href="https://www.notion.so/Doc-GLPI-DYNFI-FIREWALL-1bc3cb8d265b80b3964ec5c6821411a5?pvs=4" class="btn-read-more">Lien vers la documentation complète</a>
+        </section>
+
+        <!-- Configuration Pare-feu -->
+        <section class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Configuration DynFi Firewall
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+
+            <div class="max-w-6xl mx-auto space-y-6 sm:space-y-8">
+                <!-- DynFi Interface -->
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg text-center">
+                    <img src="dynfi-dashboard.png" alt="Interface DynFi" class="max-w-full mx-auto rounded-lg shadow-md border border-gray-200">
+                    <p class="mt-4 text-gray-600 font-medium text-sm sm:text-base">
+                        <strong class="text-primary">Console DynFi :</strong> Interface de gestion centralisée du pare-feu
+                    </p>
+                </div>
+
+                <!-- Network Configuration -->
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                    <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Attribution des Interfaces</h3>
+                    <div class="bg-gray-50 rounded-lg p-4 sm:p-6 border-l-4 border-primary">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 font-mono text-xs sm:text-sm">
+                            <div class="text-center p-3 bg-white rounded">
+                                <p class="font-bold text-primary text-sm sm:text-base">WAN (em0)</p>
+                                <p>Internet - DHCP</p>
+                            </div>
+                            <div class="text-center p-3 bg-white rounded">
+                                <p class="font-bold text-primary text-sm sm:text-base">LAN (em1)</p>
+                                <p>10.0.0.252/24</p>
+                            </div>
+                            <div class="text-center p-3 bg-white rounded">
+                                <p class="font-bold text-primary text-sm sm:text-base">DMZ (em2)</p>
+                                <p>192.168.1.1/24</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Console Config -->
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg text-center">
+                    <img src="console-config.png" alt="Configuration console" class="max-w-full mx-auto rounded-lg shadow-md border border-gray-200">
+                    <p class="mt-4 text-gray-600 font-medium text-sm sm:text-base">
+                        <strong class="text-primary">Configuration réseau :</strong> Paramétrage des adresses IP par interface
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Résultats Obtenus -->
+        <section class="py-16 sm:py-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Résultats Obtenus
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg sm:text-xl text-primary font-bold mb-3">Infrastructure Opérationnelle</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm sm:text-base">GLPI fonctionnel avec base de données sécurisée, accessible depuis le réseau LAN avec toutes les fonctionnalités de gestion d'actifs.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg sm:text-xl text-primary font-bold mb-3">Sécurité Réseau</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm sm:text-base">Segmentation réseau effective avec règles de filtrage strictes entre les zones WAN, LAN et DMZ.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg sm:text-xl text-primary font-bold mb-3">Gestion Centralisée</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm sm:text-base">Interface unique pour l'administration complète du parc informatique avec système de tickets intégré.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg sm:text-xl text-primary font-bold mb-3">Monitoring Temps Réel</h3>
+                    <p class="text-gray-700 leading-relaxed text-sm sm:text-base">Surveillance continue des connexions réseau et analyse détaillée du trafic via l'interface DynFi.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compétences Acquises -->
+        <section class="bg-gray-50 py-16 sm:py-20 px-4 sm:px-8 rounded-3xl mb-16 sm:mb-20">
+            <h2 class="text-3xl sm:text-4xl text-primary mb-8 sm:mb-10 text-center font-bold relative">
+                Compétences Acquises
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-primary-light"></div>
+            </h2>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                        <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Administration Système</h3>
+                        <ul class="space-y-2 sm:space-y-3 text-gray-700 text-sm sm:text-base">
+                            <li>• Installation et configuration environnement LAMP complet</li>
+                            <li>• Gestion avancée des bases de données MariaDB</li>
+                            <li>• Configuration et optimisation des services Apache et PHP</li>
+                            <li>• Déploiement d'applications web en production</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-4 sm:p-6 shadow-lg">
+                        <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Sécurité Réseau</h3>
+                        <ul class="space-y-2 sm:space-y-3 text-gray-700 text-sm sm:text-base">
+                            <li>• Configuration de pare-feu multi-zones avec DynFi</li>
+                            <li>• Implémentation de règles accès</li>
+                            <li>• Maîtrise de la segmentation réseau DMZ/LAN</li>
+                            <li>• Analyse et monitoring du trafic réseau</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-primary/10 to-primary-light/10 rounded-xl p-6 sm:p-8 border border-primary/20">
+                    <h3 class="text-lg sm:text-xl text-primary font-bold mb-4">Conclusion</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-sm sm:text-base">
+                        Ce projet m'a permis de développer une expertise concrète en administration d'infrastructure IT. 
+                        J'ai acquis une compréhension approfondie de la sécurisation réseau et de la mise en production 
+                        d'applications métier, compétences directement applicables en entreprise.
+                    </p>
+                    <a href="https://www.notion.so/Doc-GLPI-DYNFI-FIREWALL-1bc3cb8d265b80b3964ec5c6821411a5?pvs=4" 
+                       target="_blank" 
+                       class="inline-block bg-gradient-to-r from-primary to-primary-light text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:from-primary-light hover:to-primary transition-all duration-300 transform hover:-translate-y-1 shadow-lg text-sm sm:text-base">
+                        Documentation complète
+                    </a>
+                </div>
             </div>
         </section>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Enzo Eniona - Projet Administration Infrastructure</p>
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-6 sm:py-8 mt-8 sm:mt-12">
+        <p class="text-sm sm:text-lg">&copy; 2024 Enzo Eniona - Projet Administration Infrastructure</p>
     </footer>
 </body>
 </html>
-
